@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://140.124.181.26/upload/showHomework?hwId=14 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Questions</title>
+ <script src="./14_files/jquery-3.4.1.min.js.download" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+  
+  <link rel="stylesheet" type="text/css" href="./14_files/semantic.min.css">
+  <script type="text/javascript" src="./14_files/semantic.min.js.download"></script>
+  
+  <link rel="stylesheet" href="https://140.124.181.26/upload/style/DownBackgroud.css">
+  <script type="text/javascript" src="https://140.124.181.26/upload/javaScript/limitStudent.js"></script>	
+  
+   <script type="text/javascript" src="./14_files/loader.js.download"></script>
+   <script type="text/javascript">
+   /*//duplicate pie chart
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['其他',     ],
+          ['超出陣列邊界',      ],
+          ['使用未初始化的值',  ],
+          ['不正確的使用函式庫', ],
+          ['Segmentation Fault',    ],
+          ['程式執行時間過長',    ],
+          ['程式抄襲',    ]
+        ]);
+
+        var options = {
+          title: '第'+14+'題作業的錯誤比率',
+          backgroundColor: '#f1e2d3',
+          chartArea:{width:'50%',height:'75%'},
+          is3D: true,
+        };
+		
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+        $(window).resize(function(){
+        	drawChart();
+        }); 
+      }
+      */ 
+   </script>
+   
+<style>
+p.p {
+  font-size: 50px;
+ }
+hr.sep-3 {
+  border: none;
+  height: 1px;
+  background-image: linear-gradient(to right, #f0f0f0, #8f8f8f, #f0f0f0);
+}
+hr.sep-3::after {
+  content: '🌸';
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(60deg);
+  transform-origin: 50% 50%;
+  padding: 1rem;
+  background-color: #f1e2d3;
+}
+</style>
+</head>
+<body class="vsc-initialized">
+  <div class="ui container">
+    <div class="ui message brown" style="margin:50px 0px 15px 0px">
+    <p> 
+	  <span style="font-family:標楷體; color:black; behavior:slide; word-wrap:break-word; word-break:normal; font-weight:bold; font-size:medium;">
+		014 分數四則運算
+ <br>     給定兩個分數和一個運算符號，進行分數運算後輸出計算後的結果。
+ <br>     分數表示格式如下
+ <br>     1.真分數或假分數：分子/分母，例如3/7
+ <br>     2.帶分數：整數(分子/分母)，例如10(3/5)
+ <br>   
+ <br>   ※函式傳遞參數需使用指標
+ <br>     
+ <br>     【輸入說明】
+ <br>     第一行：輸入第一個分數
+ <br>     第二行：輸入運算符號，加（+）減（-）乘（*）除（/）
+ <br>     第三行：輸入第二個分數
+ <br>     第四行：輸入是否重複第一到第四行繼續運算，y代表繼續、n代表結束
+ <br>     
+ <br>     範例輸入：
+ <br>     -1(3/4)
+ <br>     +
+ <br>     1/2
+ <br>     n
+ <br>     
+ <br>     【輸出說明】
+ <br>     輸出結果需化為最簡分數，最簡分數定義：分子和分母互質
+ <br>     若分子大於分母，需化為帶分數
+ <br>     若計算結果為整數，則只需輸出整數
+ <br>     若輸入分數的分母或運算結果分母為0，輸出Error
+ <br>     若運算結果為負數，需在前面輸出負號
+ <br>     
+ <br>     範例輸出：
+ <br>     -1(1/4)
+ <br>     
+ <br>     【測試資料一】
+ <br>     輸入：
+ <br>     5/0
+ <br>     +
+ <br>     3/2
+ <br>     y
+ <br>     -7/8
+ <br>     /
+ <br>     0/8
+ <br>     n
+ <br>     
+ <br>     輸出：
+ <br>     Error
+ <br>     Error
+ <br>     
+ <br>     【測試資料二】
+ <br>     輸入：
+ <br>     15/3
+ <br>     /
+ <br>     -1(12/18)
+ <br>     y
+ <br>     1/5
+ <br>     -
+ <br>     1/5
+ <br>     y
+ <br>     10/3
+ <br>     +
+ <br>     90(20/3)
+ <br>     n
+ <br>     
+ <br>     輸出：
+ <br>     -3
+ <br>     0
+ <br>     100
+ <br>     
+ <br>     【測試資料三】
+ <br>     輸入：
+ <br>     3/5
+ <br>     +
+ <br>     -5/8
+ <br>     y
+ <br>     4/13
+ <br>     -
+ <br>     7/9
+ <br>     y
+ <br>     -4(3/9)
+ <br>     *
+ <br>     5/12
+ <br>     y
+ <br>     14/3
+ <br>     /
+ <br>     1(5/6)
+ <br>     n
+ <br>     
+ <br>     輸出：
+ <br>     -1/40
+ <br>     -55/117
+ <br>     -1(29/36)
+ <br>     2(6/11)
+ <br>     
+	  </span>
+	</p>
+	
+	<p class="p">
+	</p><hr class="sep-3">
+	<p class="p">
+
+	</p><div id="piechart_3d"></div>
+    </div>
+    	<input type="button" value="上一頁" onclick="history.go( -1 );return true;">
+		
+  </div>
+  
+
+</body></html>

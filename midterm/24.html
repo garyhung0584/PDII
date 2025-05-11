@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://140.124.181.26/upload/showHomework?hwId=24 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Questions</title>
+ <script src="./24_files/jquery-3.4.1.min.js.download" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+  
+  <link rel="stylesheet" type="text/css" href="./24_files/semantic.min.css">
+  <script type="text/javascript" src="./24_files/semantic.min.js.download"></script>
+  
+  <link rel="stylesheet" href="https://140.124.181.26/upload/style/DownBackgroud.css">
+  <script type="text/javascript" src="https://140.124.181.26/upload/javaScript/limitStudent.js"></script>	
+  
+   <script type="text/javascript" src="./24_files/loader.js.download"></script>
+   <script type="text/javascript">
+   /*//duplicate pie chart
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['其他',     ],
+          ['超出陣列邊界',      ],
+          ['使用未初始化的值',  ],
+          ['不正確的使用函式庫', ],
+          ['Segmentation Fault',    ],
+          ['程式執行時間過長',    ],
+          ['程式抄襲',    ]
+        ]);
+
+        var options = {
+          title: '第'+24+'題作業的錯誤比率',
+          backgroundColor: '#f1e2d3',
+          chartArea:{width:'50%',height:'75%'},
+          is3D: true,
+        };
+		
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+        $(window).resize(function(){
+        	drawChart();
+        }); 
+      }
+      */ 
+   </script>
+   
+<style>
+p.p {
+  font-size: 50px;
+ }
+hr.sep-3 {
+  border: none;
+  height: 1px;
+  background-image: linear-gradient(to right, #f0f0f0, #8f8f8f, #f0f0f0);
+}
+hr.sep-3::after {
+  content: '🌸';
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(60deg);
+  transform-origin: 50% 50%;
+  padding: 1rem;
+  background-color: #f1e2d3;
+}
+</style>
+</head>
+<body class="vsc-initialized">
+  <div class="ui container">
+    <div class="ui message brown" style="margin:50px 0px 15px 0px">
+    <p> 
+	  <span style="font-family:標楷體; color:black; behavior:slide; word-wrap:break-word; word-break:normal; font-weight:bold; font-size:medium;">
+		024 魔術方塊
+ <br> 
+ <br> 有一魔術方塊有六面，一開始白色朝自己，藍色朝上，紅色朝右
+ <br> 立體示意圖所示：
+ <br> <img src="./24_files/qHbxGdc.png">
+ <br> 展開示意圖所示：
+ <br> <img src="./24_files/zYYaWRK.jpg" width="640" height="360">
+ <br> 
+ <br> 顏色編號，1: 藍色，2: 紅色，3: 黃色，4: 白色，5: 橘色，6:綠色。
+ <br> 
+ <br> 魔術方塊的操作：
+ <br> 10 表示直欄(column)最左邊向前轉一次。
+ <br> 11 表示直欄(column)中間向前轉一次。
+ <br> 12 表示直欄(column)最右邊向前轉一次。
+ <br> 20 表示橫列(row)最上面向左轉一次。
+ <br> 21 表示橫列(row)中間向左轉一次。
+ <br> 22 表示橫列(row)最下面向左轉一次。
+ <br> 註：以上修改操作，皆不會轉動魔術方塊的本體，只會針對欄或列做操作
+ <br> 示意圖所示：
+ <br> <img src="./24_files/B8dJXrK.png">
+ <br> 
+ <br> 向前轉：即對於紅色面為順時針旋轉方向
+ <br> 向左轉：即對於藍色面為順時針旋轉方向
+ <br> 
+ <br> 經過 M 次操作後，輸出魔術方塊「面向自己」(即原始白色面) 顏色編號。
+ <br> 
+ <br> 
+ <br> 【輸入說明】
+ <br> 第一行，輸入一整數 M，代表魔術方塊的操作次數，
+ <br> 其後 M 行，每一行輸入一整數，代表魔術方塊的操作方式。
+ <br> 
+ <br> 範例輸入說明:
+ <br> 2 (接下來會有 2 次修改操作)
+ <br> 10 (表示直欄最左邊向前轉一次)
+ <br> 20 (表示橫列最上面向左轉一次)
+ <br> 
+ <br> 經過10操作後魔術方塊顏色編號為：
+ <br> 6 4 4
+ <br> 6 4 4 
+ <br> 6 4 4
+ <br> 
+ <br> 經過20操作後魔術方塊顏色編號為：
+ <br> 2 2 2
+ <br> 6 4 4
+ <br> 6 4 4
+ <br> 
+ <br> 【輸出說明】
+ <br> 經過 M 次操作後，輸出「面向自己」 9 格的顏色編號。
+ <br> 註：row 的數字間以一個空格區隔
+ <br> 
+ <br> 範例輸出說明:
+ <br> 2 2 2
+ <br> 6 4 4
+ <br> 6 4 4
+ <br> 
+ <br> 【測試資料一】
+ <br> 輸入：
+ <br> 2
+ <br> 10
+ <br> 12
+ <br> 
+ <br> 輸出：
+ <br> 6 4 6
+ <br> 6 4 6
+ <br> 6 4 6
+ <br> 
+ <br> 
+ <br> 【測試資料二】
+ <br> 輸入：
+ <br> 4
+ <br> 21
+ <br> 21
+ <br> 10
+ <br> 21
+ <br> 
+ <br> 輸出：
+ <br> 6 4 4
+ <br> 5 5 5
+ <br> 6 4 4
+ <br> 
+ <br> 【測試資料三】
+ <br> 輸入：
+ <br> 6
+ <br> 20
+ <br> 10
+ <br> 10
+ <br> 20
+ <br> 21
+ <br> 21
+ <br> 
+ <br> 輸出：
+ <br> 3 3 3
+ <br> 3 3 4
+ <br> 5 4 4
+ <br> 
+ <br> 【測試資料四】
+ <br> 輸入：
+ <br> 8
+ <br> 10
+ <br> 20
+ <br> 10
+ <br> 20
+ <br> 10
+ <br> 22
+ <br> 21
+ <br> 11
+ <br> 
+ <br> 輸出：
+ <br> 1 6 1 
+ <br> 2 6 2 
+ <br> 2 1 2
+	  </span>
+	</p>
+	
+	<p class="p">
+	</p><hr class="sep-3">
+	<p class="p">
+
+	</p><div id="piechart_3d"></div>
+    </div>
+    	<input type="button" value="上一頁" onclick="history.go( -1 );return true;">
+		
+  </div>
+  
+
+</body></html>

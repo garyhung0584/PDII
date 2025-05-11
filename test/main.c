@@ -1,67 +1,114 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct
 {
-    char name;
-    int scores;
-    int wins;
-} Team;
+    int up;
+    int down;
+} Num;
 
-void AddWins(Team teams[], char team){
-    for(int i = 0; i < 3; i++){
-        if(teams[i].name == team){
-            teams[i].wins++;
-            break;
-        }
+int gcd(int a, int b)
+{
+    while (b != 0)
+    {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return abs(a);
+}
+
+void simplify(Num *num){
+    if (num->down == 0) return;
+    if (num->up == 0){
+        num->down = 1;
+        return;
     }
 }
-void AddScore(Team teams[], char team, int score){
-    for(int i = 0; i < 3; i++){
-        if(teams[i].name == team){
-            teams[i].scores += score;
-            break;
+
+Num parseFraction(char *input)
+{
+    Num frac = {0, 1};
+    int whole = 0, up = 0, down = 1;
+    if (strchr(input, '('))
+    {
+        sscanf(input, "%d(%d/%d)", &whole, &up, &down);
+        frac.up = whole * down;
+        if (whole < 0)
+        {
+            frac.up -= up;
         }
+        else
+        {
+            frac.pu == up;
+        }
+        frac.down = down;
     }
+    else
+    {
+        sscanf(input, "%d/%d", &up, &down);
+        frac.up = up;
+        frac.down = down;
+    }
+    return frac;
+}
+
+Num operate(Num a, Num b, char op){
+    Num result = {0, 1};
+    if (a.down == 0 || b.down == 0) {
+        result.down = 0;
+        return result;
+    }
+
+    switch (op){
+        case '+':
+            result.up = a.up * b.down + b.up * a.down;
+            result.down = a.down * b.down;
+            break;
+        case '-':
+            result.up = a.up * b.down - b.up * a.down;
+            result.down = a.down * b.down;
+            break;
+        case '*':
+            result.up = a.up * b.up;
+            result.down = a.down * b.down;
+            break;
+        case '/':
+            if (b.up == 0) {
+                result.down = 0;
+                return result;
+            }
+            result.up = a.up * b.down;
+            result.down = a.down * b.up;
+            break;
+    }
+    simplify(&result);
+    return result;
 }
 
 
 int main()
 {
-    int m;
-    Team teams[3] = {{'A', 0, 0}, {'B', 0, 0}, {'C', 0, 0} };
+    char input1[20], input2[20], op, cont;
+    Num results[100];
+    int count = 0;
 
-    scanf("%d", &m);
-
-    for (int i = 0; i < m; i++)
+    do
     {
-        char t1,t2;
-        int score1 = 0, score2 = 0;
-        scanf(" %c %c", &t1, &t2);
+        scanf("%s", input1);
+        scanf(" %c", &op);
+        scanf("%s", input2);
 
-        for (int j = 0; j < 4; j++){
-            int s1, s2;
-            scanf("%d %d", &s1, &s2);
-            score1 += s1;
-            score2 += s2;
-        }
-        AddScore(teams, t1, score1);
-        AddScore(teams, t2, score2);
+        Num frac1 = parseFraction(input1);
+        Num frac2 = parseFraction(input2);
+        results[count++] = operate(frac1, frac2, op);
 
-        if (score1 > score2){
-            AddWins(teams, t1);
-        } else {
-            AddWins(teams, t2);
-        }
+        scanf(" %c", &cont);
     }
-    Team bestTeam = teams[0];
-    for (int i = 0; i < 3; i++){
-            if (teams[i].wins > bestTeam.wins){
-                bestTeam = teams[i];
-            }
-    }
+    while (cont == 'y');
 
-    printf("%c %d", bestTeam.name, bestTeam.scores);
+
 
     return 0;
 }

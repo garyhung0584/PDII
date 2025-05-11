@@ -1,67 +1,67 @@
+#include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 
-#define MAX_TEAMS 3
-
-typedef struct {
+typedef struct
+{
     char name;
+    int scores;
     int wins;
-    int total_score;
 } Team;
 
-void update_team(Team teams[], char team, int score) {
-    for (int i = 0; i < MAX_TEAMS; i++) {
-        if (teams[i].name == team) {
+void AddWins(Team teams[], char team){
+    for(int i = 0; i < 3; i++){
+        if(teams[i].name == team){
             teams[i].wins++;
+            break;
+        }
+    }
+}
+void AddScore(Team teams[], char team, int score){
+    for(int i = 0; i < 3; i++){
+        if(teams[i].name == team){
+            teams[i].scores += score;
+            break;
         }
     }
 }
 
-void update_score(Team teams[], char team, int score) {
-    for (int i = 0; i < MAX_TEAMS; i++) {
-        if (teams[i].name == team) {
-            teams[i].total_score += score;
-        }
-    }
-}
 
-int main() {
-    int M;
-    scanf("%d", &M);
+int main()
+{
+    int m;
+    Team teams[3] = {{'A', 0, 0}, {'B', 0, 0}, {'C', 0, 0} };
 
-    Team teams[MAX_TEAMS] = { {'A', 0, 0}, {'B', 0, 0}, {'C', 0, 0} };
+    scanf("%d", &m);
 
-    for (int i = 0; i < M; i++) {
-        char team1, team2;
+    for (int i = 0; i < m; i++)
+    {
+        char t1,t2;
         int score1 = 0, score2 = 0;
+        scanf(" %c %c", &t1, &t2);
 
-        scanf(" %c %c", &team1, &team2);
-
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 4; j++){
             int s1, s2;
             scanf("%d %d", &s1, &s2);
             score1 += s1;
             score2 += s2;
         }
+        AddScore(teams, t1, score1);
+        AddScore(teams, t2, score2);
 
-        update_score(teams, team1, score1);
-        update_score(teams, team2, score2);
-
-        if (score1 > score2) {
-            update_team(teams, team1, score1);
+        if (score1 > score2){
+            AddWins(teams, t1);
         } else {
-            update_team(teams, team2, score2);
+            AddWins(teams, t2);
         }
     }
-
-    Team *best_team = &teams[0];
-    for (int i = 1; i < MAX_TEAMS; i++) {
-        if (teams[i].wins > best_team->wins) {
-            best_team = &teams[i];
-        }
+    Team bestTeam = teams[0];
+    for (int i = 0; i < 3; i++){
+            if (teams[i].wins > bestTeam.wins){
+                bestTeam = teams[i];
+            }
     }
 
-    printf("%c %d\n", best_team->name, best_team->total_score);
+    printf("%c %d", bestTeam.name, bestTeam.scores);
 
     return 0;
 }
