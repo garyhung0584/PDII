@@ -1,24 +1,22 @@
 #include <stdio.h>
-void print(int a[], int n) {
-    int i=0;
-    for (i=0; i<n; i++) {
-        printf("(%x - %d)", &a[i], a[i]);
-    if (i%3==2) printf("\n");
-    }
+#include <stdlib.h>
+void fun(char fileName1[], char fileName2[]) {
+FILE *fp1, *fp2;
+char ch,full[20];
+if ((fp1=fopen(fileName1,"r"))==NULL) {
+printf("cannot open file %s",fileName1);
+exit(0);
 }
-void f1() {
-    int i=0, a[]={6,5,4,3,2,1};
-    int *p = a;
-    *(p++) = 0;
-    print(a, 6);
-    printf("%x, %d\n", p, *p);
-    *(++p)= -1;
-    print(a, 6);
-    printf("%x, %d\n", p, *p);
-    a[0]=(*(p++));print(a, 6);
-    printf("%x, %d\n", p, *p);
+fp2=fopen(fileName2,"w");
+do {
+if ((ch=fgetc(fp1))=='a') ch='@';
+printf("%c",ch);
+fputc(ch,fp2);
+} while (ch!=EOF);
+fclose(fp1);
+fclose(fp2);
 }
-int main() {
-    f1();
-    return 0;
+int main(void) {
+fun("a.txt", "b.txt");
+return 0;
 }
