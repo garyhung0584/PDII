@@ -9,31 +9,38 @@
 const char* PUNCTUATION = ".,!?:;";
 
 // Check if character is in allowed punctuation set
-int is_allowed_punct(char c) {
+int is_allowed_punct(char c)
+{
     return strchr(PUNCTUATION, c) != NULL;
 }
 
 // Determine if word matches target P; returns 1 if match, and sets trailing punctuation
-int match_word(const char* word, const char* target, char* out_punct) {
+int match_word(const char* word, const char* target, char* out_punct)
+{
     size_t wlen = strlen(word);
     size_t tlen = strlen(target);
     *out_punct = '\0';
 
     // If contains apostrophe or backtick, only exact match
-    for (size_t i = 0; i < wlen; ++i) {
-        if (word[i] == '\'' || word[i] == '`') {
+    for (size_t i = 0; i < wlen; ++i)
+    {
+        if (word[i] == '\'' || word[i] == '`')
+        {
             if (strcmp(word, target) == 0) return 1;
             return 0;
         }
     }
 
     // Exact match
-    if (strcmp(word, target) == 0) {
+    if (strcmp(word, target) == 0)
+    {
         return 1;
     }
     // Match with one trailing punctuation
-    if (wlen == tlen + 1 && is_allowed_punct(word[wlen-1])) {
-        if (strncmp(word, target, tlen) == 0) {
+    if (wlen == tlen + 1 && is_allowed_punct(word[wlen-1]))
+    {
+        if (strncmp(word, target, tlen) == 0)
+        {
             *out_punct = word[wlen-1];
             return 1;
         }
@@ -41,7 +48,8 @@ int match_word(const char* word, const char* target, char* out_punct) {
     return 0;
 }
 
-int main() {
+int main()
+{
     char article[MAX_ARTICLE_LENGTH];
     char *words[MAX_WORDS];
     char P[128], Q[128];
@@ -56,19 +64,24 @@ int main() {
     // Tokenize
     char *copy = strdup(article);
     char *tok = strtok(copy, " ");
-    while (tok && count < MAX_WORDS) {
+    while (tok && count < MAX_WORDS)
+    {
         words[count++] = strdup(tok);
         tok = strtok(NULL, " ");
     }
     free(copy);
 
     // 1. Replacement
-    for (int i = 0; i < count; ++i) {
+    for (int i = 0; i < count; ++i)
+    {
         char punct;
-        if (match_word(words[i], P, &punct)) {
+        if (match_word(words[i], P, &punct))
+        {
             printf("%s", Q);
             if (punct) putchar(punct);
-        } else {
+        }
+        else
+        {
             printf("%s", words[i]);
         }
         if (i < count-1) putchar(' ');
@@ -76,9 +89,11 @@ int main() {
     putchar('\n');
 
     // 2. Insert before
-    for (int i = 0; i < count; ++i) {
+    for (int i = 0; i < count; ++i)
+    {
         char punct;
-        if (match_word(words[i], P, &punct)) {
+        if (match_word(words[i], P, &punct))
+        {
             printf("%s ", Q);
         }
         printf("%s", words[i]);
@@ -87,11 +102,13 @@ int main() {
     putchar('\n');
 
     // 3. Insert after
-    for (int i = 0; i < count; ++i) {
+    for (int i = 0; i < count; ++i)
+    {
         printf("%s", words[i]);
         char punct;
-        if (match_word(words[i], P, &punct)) {
-            printf(" %s", Q);
+        if (match_word(words[i], P, &punct))
+        {
+            printf("%s", Q);
         }
         if (i < count-1) putchar(' ');
     }
@@ -99,9 +116,11 @@ int main() {
 
     // 4. Deletion
     int first = 1;
-    for (int i = 0; i < count; ++i) {
+    for (int i = 0; i < count; ++i)
+    {
         char punct;
-        if (!match_word(words[i], P, &punct)) {
+        if (!match_word(words[i], P, &punct))
+        {
             if (!first) putchar(' ');
             printf("%s", words[i]);
             first = 0;
@@ -110,7 +129,8 @@ int main() {
     putchar('\n');
 
     // 5. Reverse order
-    for (int i = count-1; i >= 0; --i) {
+    for (int i = count-1; i >= 0; --i)
+    {
         printf("%s", words[i]);
         if (i > 0) putchar(' ');
     }

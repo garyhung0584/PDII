@@ -55,7 +55,7 @@ int main() {
     int N;
     scanf("%d", &N);
 
-    while (N--) {
+    while (N-- && N >= 0) {
         int M;
         scanf("%d", &M);
 

@@ -1,114 +1,95 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 
-typedef struct
-{
-    int up;
-    int down;
-} Num;
+#define MAX 100
 
-int gcd(int a, int b)
+typedef struct Node
 {
-    while (b != 0)
-    {
-        int temp = b;
-        b = a % b;
-        a = temp;
-    }
-    return abs(a);
+    int duration;
+    int indegree;
+    int fromCount;
+    int from[MAX];
+} Node;
+
+int max(int a, int b)
+{
+    return a > b ? a : b;
 }
 
-void simplify(Num *num){
-    if (num->down == 0) return;
-    if (num->up == 0){
-        num->down = 1;
-        return;
-    }
-}
-
-Num parseFraction(char *input)
+int getResult(int M, Node nodes[])
 {
-    Num frac = {0, 1};
-    int whole = 0, up = 0, down = 1;
-    if (strchr(input, '('))
+    int queue[MAX], front = 0, rear = 0;
+    int dp[MAX] = {0};
+
+
+    for (int i = 1; i < M; i++)
     {
-        sscanf(input, "%d(%d/%d)", &whole, &up, &down);
-        frac.up = whole * down;
-        if (whole < 0)
+        if (nodes[i].indegree == 0)
         {
-            frac.up -= up;
+            dp[i] = nodes[i].duration;
+            queue[rear++] = i;
         }
-        else
-        {
-            frac.pu == up;
-        }
-        frac.down = down;
     }
-    else
+
+    while (front < rear)
     {
-        sscanf(input, "%d/%d", &up, &down);
-        frac.up = up;
-        frac.down = down;
-    }
-    return frac;
-}
+        int curr = queue[front++];
+        for (int i = 1; i <= M; i++)
+        {
+            for (int j = 0; j < nodes[i].fromCount; j++)
+            {
+                if (nodes[i].from[j] == curr)
+                {
+                    nodes[i].indegree--;
+                    dp[i] = max(dp[i], dp[curr] + nodes[i].duration);
+                    if (nodes[i].indegree == 0){
+                        queue[rear++] = i;
+                    }
+                }
 
-Num operate(Num a, Num b, char op){
-    Num result = {0, 1};
-    if (a.down == 0 || b.down == 0) {
-        result.down = 0;
-        return result;
-    }
-
-    switch (op){
-        case '+':
-            result.up = a.up * b.down + b.up * a.down;
-            result.down = a.down * b.down;
-            break;
-        case '-':
-            result.up = a.up * b.down - b.up * a.down;
-            result.down = a.down * b.down;
-            break;
-        case '*':
-            result.up = a.up * b.up;
-            result.down = a.down * b.down;
-            break;
-        case '/':
-            if (b.up == 0) {
-                result.down = 0;
-                return result;
             }
-            result.up = a.up * b.down;
-            result.down = a.down * b.up;
-            break;
+        }
     }
-    simplify(&result);
-    return result;
+    // 找出最大時間
+    int maxTime = 0;
+    for (int i = 1; i <= M; i++) {
+        maxTime = max(maxTime, dp[i]);
+    }
+
+    return maxTime;
 }
+
 
 
 int main()
 {
-    char input1[20], input2[20], op, cont;
-    Num results[100];
-    int count = 0;
-
-    do
+    int N;
+    scanf("%d", &N);
+    while (N--)
     {
-        scanf("%s", input1);
-        scanf(" %c", &op);
-        scanf("%s", input2);
+        int M;
+        scanf("%d", &M);
+        Node nodes[MAX];
 
-        Num frac1 = parseFraction(input1);
-        Num frac2 = parseFraction(input2);
-        results[count++] = operate(frac1, frac2, op);
+        for (int i = 1; i <= M; i++)
+        {
+            int duration, K;
+            scanf("%d %d", &duration, &K);
+            nodes[i].duration = duration;
 
-        scanf(" %c", &cont);
+
+            for (int j = 0; j < K; j++)
+            {
+                int target;
+                scanf("%d", &target);
+                nodes[target].from[nodes[target].fromCount++] = i;
+                nodes[target].indegree++;
+            }
+        }
+
+        int result = getResult(M, nodes);
+        printf("%d\n", result);
     }
-    while (cont == 'y');
-
-
 
     return 0;
 }
