@@ -17,7 +17,7 @@ int len = 0;
 
 // Create a new node with given data
 nodep_t create_node(int data) {
-    nodep_t newNode = (nodep_t)malloc(sizeof(node_t));
+    nodep_t newNode = malloc(sizeof(node_t));
     if (!newNode) {
         fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);
@@ -174,9 +174,7 @@ void print_list() {
 
 int main() {
     int N;
-    if (scanf("%d", &N) != 1) {
-        return 0;
-    }
+    scanf("%d", &N);
 
     for (int i = 0; i < N; i++) {
         char cmd[20];
